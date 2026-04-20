@@ -9,7 +9,7 @@ for file in $RAW_DIR/*; do
     filename=$(basename "$file")
     name="${filename%.*}"
 
-    echo "🚀 Converting: $filename"
+    echo " Converting: $filename"
 
     mkdir -p "$OUT_DIR/$name"
 
@@ -21,7 +21,7 @@ for file in $RAW_DIR/*; do
     -hls_list_size 0 \
     -f hls "$OUT_DIR/$name/index.m3u8"
 
-    echo "✅ Done: $name"
+    echo " Done: $name"
 done
 
-echo "🎉 All videos converted to HLS!"
+echo " All videos converted to HLS!"

@@ -10,13 +10,13 @@ export default function VideoPlayer({ url }) {
 
     if (!video || !url) return;
 
-    // 🔥 cleanup old instance
+    
     if (hlsRef.current) {
       hlsRef.current.destroy();
       hlsRef.current = null;
     }
 
-    // ================= HLS =================
+  
     if (Hls.isSupported()) {
       const hls = new Hls();
       hlsRef.current = hls;

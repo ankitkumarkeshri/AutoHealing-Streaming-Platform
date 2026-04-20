@@ -11,29 +11,29 @@ import { connectRedis } from "./redis.js";
 import redisClient from "./redis.js";
 import Video from "./models/Video.js";
 
-// ================= CONNECT =================
+
 connectDB();
 connectRedis();
 
 const app = express();
 const server = http.createServer(app);
 
-// ================= SOCKET =================
+
 export const io = new Server(server, {
   cors: { origin: "*" },
 });
 
 const PORT = 3000;
 
-// ================= PATH =================
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// ================= MIDDLEWARE =================
+
 app.use(cors());
 app.use(express.json());
 
-// inject socket into req
+
 app.use((req, res, next) => {
   req.io = io;
   next();
@@ -41,11 +41,11 @@ app.use((req, res, next) => {
 
 app.use("/upload", uploadRoute);
 
-// ================= VIDEO PATH =================
+
 const VIDEO_ROOT = path.resolve(__dirname, "../videos");
 const HLS_DIR = path.join(VIDEO_ROOT, "hls");
 
-// ================= STATIC =================
+
 app.use(
   "/hls",
   express.static(HLS_DIR, {
@@ -62,7 +62,7 @@ app.use(
   })
 );
 
-// ================= HEALTH =================
+
 app.get("/", (req, res) => {
   res.json({
     status: "OK",
@@ -70,9 +70,7 @@ app.get("/", (req, res) => {
   });
 });
 
-// ======================================================
-// 🎬 GET VIDEOS (REDIS CACHE)
-// ======================================================
+
 app.get("/api/videos", async (req, res) => {
   try {
     const cache = await redisClient.get("videos");
@@ -82,7 +80,7 @@ app.get("/api/videos", async (req, res) => {
       return res.json(JSON.parse(cache));
     }
 
-    console.log("💾 Mongo HIT");
+    console.log(" Mongo HIT");
     const videos = await Video.find().sort({ createdAt: -1 });
 
     await redisClient.set("videos", JSON.stringify(videos), {
@@ -95,9 +93,7 @@ app.get("/api/videos", async (req, res) => {
   }
 });
 
-// ======================================================
-// 👁️ INCREMENT VIEWS (WITH REDIS INVALIDATION)
-// ======================================================
+
 app.post("/api/videos/:id/view", async (req, res) => {
   try {
     const { id } = req.params;
@@ -108,7 +104,7 @@ app.post("/api/videos/:id/view", async (req, res) => {
       { new: true }
     );
 
-    // 🔥 VERY IMPORTANT: clear cache
+  
     await redisClient.del("videos");
 
     res.json(video);
@@ -117,9 +113,6 @@ app.post("/api/videos/:id/view", async (req, res) => {
   }
 });
 
-// ======================================================
-// 🔍 SEARCH
-// ======================================================
 app.get("/api/videos/search", async (req, res) => {
   try {
     const q = req.query.q || "";
@@ -134,9 +127,7 @@ app.get("/api/videos/search", async (req, res) => {
   }
 });
 
-// ======================================================
-// 📅 DATE FILTER
-// ======================================================
+
 app.get("/api/videos/date", async (req, res) => {
   try {
     const { from, to } = req.query;
@@ -154,16 +145,16 @@ app.get("/api/videos/date", async (req, res) => {
   }
 });
 
-// ================= SOCKET =================
+
 io.on("connection", (socket) => {
   console.log("⚡ Connected:", socket.id);
 
   socket.on("disconnect", () => {
-    console.log("❌ Disconnected:", socket.id);
+    console.log("Disconnected:", socket.id);
   });
 });
 
-// ================= START =================
+
 server.listen(PORT, () => {
-  console.log(`🚀 http://localhost:${PORT}`);
+  console.log(` http://localhost:${PORT}`);
 });

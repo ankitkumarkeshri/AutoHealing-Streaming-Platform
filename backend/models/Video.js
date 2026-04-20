@@ -17,14 +17,14 @@ const videoSchema = new mongoose.Schema(
       required: true,
     },
 
-    // 🔥 NEW FIELD: views count
+  
     views: {
       type: Number,
       default: 0,
     },
   },
   {
-    timestamps: true, // createdAt + updatedAt
+    timestamps: true, 
   }
 );
 

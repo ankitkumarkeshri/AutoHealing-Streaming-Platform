@@ -6,15 +6,15 @@ export const initWebSocket = (server) => {
   wss = new WebSocketServer({ server });
 
   wss.on("connection", (ws) => {
-    console.log("🟢 Client connected to WebSocket");
+    console.log(" Client connected to WebSocket");
 
     ws.on("close", () => {
-      console.log("🔴 Client disconnected");
+      console.log(" Client disconnected");
     });
   });
 };
 
-// 🔥 broadcast helper (IMPORTANT)
+
 export const broadcastVideo = (data) => {
   if (!wss) return;
 

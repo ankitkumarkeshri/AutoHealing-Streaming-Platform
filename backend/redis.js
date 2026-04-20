@@ -8,7 +8,7 @@ const client = createClient({
 });
 
 client.on("error", (err) => {
-  console.log("❌ Redis Error:", err.message);
+  console.log(" Redis Error:", err.message);
 });
 
 const connectWithRetry = async () => {
@@ -18,8 +18,8 @@ const connectWithRetry = async () => {
       console.log("⚡ Redis Connected:", redisURL);
     }
   } catch (err) {
-    console.log("❌ Redis Retry in 5 sec...", err.message);
-    setTimeout(connectWithRetry, 5000); // 🔥 retry loop
+    console.log("Redis Retry in 5 sec...", err.message);
+    setTimeout(connectWithRetry, 5000); 
   }
 };
 

@@ -20,10 +20,10 @@ export default function VideoGrid({ videos, onSelect, currentVideo }) {
               borderRadius: "8px",
               userSelect: "none",
 
-              // 🔥 ONLY active item colored
+              
               backgroundColor: isActive ? "#ffeaea" : "#fff",
 
-              // 🔥 remove hover override issue
+            
               transition: "all 0.2s ease",
             }}
           >

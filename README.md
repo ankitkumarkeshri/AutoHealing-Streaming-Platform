@@ -1,10 +1,10 @@
-# 🎬 Streaming Platform (Dockerized Backend System)
+# AutoHealing Streaming Platform (
 
-A scalable backend system for a video streaming platform, built using Node.js, MongoDB, Redis, and Docker.
+A scalable  system for a video streaming  built using Node.js, MongoDB, Redis, and Docker.
 
 ---
 
-## 🚀 Project Overview
+##  Project Overview
 
 This project is a **containerized backend system** designed to simulate a real-world video streaming architecture.
 
@@ -18,7 +18,7 @@ It includes:
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 Client → Backend API → Redis (Cache)
@@ -28,7 +28,7 @@ Client → Backend API → Redis (Cache)
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 streaming-platform/
@@ -44,7 +44,7 @@ streaming-platform/
 
 ---
 
-## ⚙️ Tech Stack
+##  Tech Stack
 
 * **Backend:** Node.js, Express
 * **Database:** MongoDB
@@ -54,7 +54,7 @@ streaming-platform/
 
 ---
 
-## 🐳 Docker Setup
+##  Docker Setup
 
 ### 1. Build & Run Containers
 
@@ -70,7 +70,7 @@ docker compose down
 
 ---
 
-## 🔌 Services
+##  Services
 
 | Service | Port  | Description |
 | ------- | ----- | ----------- |
@@ -80,14 +80,14 @@ docker compose down
 
 ---
 
-## 💾 Volumes
+##  Volumes
 
 * `videos/` → persistent storage for uploaded videos
 * `mongo-data` → MongoDB data persistence
 
 ---
 
-## ⚠️ Important Notes
+##  Important Notes
 
 * Ensure ports **3000, 27017, 6379** are free before running
 * Local MongoDB/Redis services should be stopped if using Docker containers
@@ -95,7 +95,7 @@ docker compose down
 
 ---
 
-## 🧠 Current Features
+##  Current Features
 
 * Dockerized backend system
 * MongoDB integration
@@ -105,7 +105,7 @@ docker compose down
 
 ---
 
-## 🚧 Future Work
+##  Future Work
 
 This project will be extended into a full production-grade system:
 
@@ -118,7 +118,7 @@ This project will be extended into a full production-grade system:
 
 ### 🔹 Frontend
 
-* React / Next.js UI
+*  UI integration
 * Video player integration
 * Real-time streaming interface
 
@@ -142,12 +142,12 @@ This project will be extended into a full production-grade system:
 
 ---
 
-## 📌 Goal
+##  Goal
 
 To evolve this into a **scalable, production-ready streaming platform** with full DevOps and distributed system capabilities.
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 Built as part of a deep system design & DevOps learning journey.

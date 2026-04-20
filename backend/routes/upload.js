@@ -10,7 +10,6 @@ import redisClient from "../redis.js";
 
 const router = express.Router();
 
-// ================= PATH =================
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -18,12 +17,11 @@ const BASE_DIR = path.resolve(__dirname, "../../videos");
 const UPLOAD_DIR = path.join(BASE_DIR, "uploads");
 const HLS_DIR = path.join(BASE_DIR, "hls");
 
-// ensure folders
 [UPLOAD_DIR, HLS_DIR].forEach((dir) => {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 });
 
-// ================= MULTER =================
+
 const storage = multer.diskStorage({
   destination: (_, __, cb) => cb(null, UPLOAD_DIR),
   filename: (_, file, cb) =>
@@ -32,9 +30,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// ======================================================
-// 🎬 UPLOAD + HLS + DB + REDIS + SOCKET
-// ======================================================
 router.post("/", upload.single("video"), (req, res) => {
   try {
     if (!req.file) return res.status(400).json({ error: "No file" });
@@ -68,10 +63,9 @@ router.post("/", upload.single("video"), (req, res) => {
 
       await video.save();
 
-      // 🔥 CLEAR REDIS CACHE
+    
       await redisClient.del("videos");
 
-      // 🔥 SOCKET EMIT
       req.io.emit("new-video", video);
 
       res.json(video);

@@ -4,7 +4,6 @@ import { io } from "socket.io-client";
 import VideoPlayer from "../components/VideoPlayer";
 import VideoGrid from "../components/VideoGrid";
 
-// 🔥 socket connect
 const socket = io("http://localhost:3000");
 
 export default function Home() {
@@ -17,7 +16,7 @@ export default function Home() {
 
   const userSelectedRef = useRef(false);
 
-  // ================= FETCH =================
+
   const fetchVideos = async (url = "http://localhost:3000/api/videos") => {
     try {
       const res = await fetch(url);
@@ -25,7 +24,7 @@ export default function Home() {
 
       setVideos(data);
 
-      // 🔥 IMPORTANT: store FULL OBJECT (not just URL)
+
       if (!userSelectedRef.current && data.length > 0) {
         setCurrentVideo(data[0]);
       }
@@ -35,12 +34,12 @@ export default function Home() {
     }
   };
 
-  // ================= INITIAL LOAD =================
+
   useEffect(() => {
     fetchVideos();
   }, []);
 
-  // ================= SOCKET =================
+  
   useEffect(() => {
     socket.on("new-video", (video) => {
       setVideos((prev) => [video, ...prev]);
@@ -53,13 +52,13 @@ export default function Home() {
     return () => socket.off("new-video");
   }, []);
 
-  // ================= VIDEO CLICK =================
+
   const handleSelect = (video) => {
     userSelectedRef.current = true;
-    setCurrentVideo(video); // 🔥 FULL OBJECT
+    setCurrentVideo(video); 
   };
 
-  // ================= SEARCH =================
+  
   const handleSearch = () => {
     userSelectedRef.current = false;
 
@@ -73,7 +72,7 @@ export default function Home() {
     );
   };
 
-  // ================= DATE FILTER =================
+  
   const handleDateFilter = () => {
     userSelectedRef.current = false;
 
@@ -111,7 +110,7 @@ export default function Home() {
         </button>
       </div>
 
-      {/* ================= PLAYER ================= */}
+      
       {currentVideo && (
         <>
           <VideoPlayer url={currentVideo.url} />
@@ -144,7 +143,7 @@ export default function Home() {
       <VideoGrid
         videos={videos}
         onSelect={handleSelect}
-        currentVideo={currentVideo} // 🔥 important for highlight
+        currentVideo={currentVideo} 
       />
     </div>
   );
