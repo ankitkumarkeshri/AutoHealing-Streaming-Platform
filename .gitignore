@@ -1,0 +1,36 @@
+# Node modules
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Environment variables
+.env
+.env.*
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VS Code / IDE
+.vscode/
+.idea/
+
+# Docker
+docker-compose.override.yml
+
+# Build files
+dist/
+build/
+
+# Videos (local storage, don't push heavy data)
+videos/
+
+# Mongo data (if accidentally created locally)
+mongo-data/
+
+# Misc
+*.swp
