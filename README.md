@@ -1,4 +1,4 @@
-# AutoHealing Streaming Platform (
+# AutoHealing Streaming Platform 
 
 A scalable  system for a video streaming  built using Node.js, MongoDB, Redis, and Docker.
 
